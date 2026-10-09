@@ -27,6 +27,9 @@ if (!nombre || !apellido || !tel || !email || !mensaje) {
 
 const transporter = nodemailer.createTransport({
   // configuración SMTP
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth:{
     user: process.env.USER,
     pass:process.env.PASS 
