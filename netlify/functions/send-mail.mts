@@ -1,7 +1,6 @@
-import type { Context } from "@netlify/functions";
 import nodemailer from "nodemailer";
 
-export default async (req: Request, context: Context) => {
+export default async (req: Request) => {
 const body = await req.json();
 
 const {
@@ -29,22 +28,22 @@ if (!nombre || !apellido || !tel || !email || !mensaje) {
 const transporter = nodemailer.createTransport({
   // configuración SMTP
   auth:{
-    user: "jas",
-    pass:"asgfs" 
+    user: process.env.USER,
+    pass:process.env.PASS 
   }
   
 });
 
 await transporter.sendMail({
-  from: process.env.EMAIL_USER,
-  to: process.env.EMAIL_TO,
-  subject: "Nueva consulta",
+  from: email,
+  to: "segurosmartinballesteros@gmail.com",
+  replyTo:email,
+  subject: "Nueva consulta desde la web",
   text: `
     Nombre: ${nombre}
     Apellido: ${apellido}
     Teléfono: ${tel}
-    Email: ${email}
-
+    Mail:${email}
     Mensaje:
     ${mensaje}
   `,

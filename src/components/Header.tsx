@@ -103,7 +103,7 @@ export function Header() {
                         {navItems.map((item, index) => (
                             <li
                                 key={item.path}
-                                ref={el => linksRef.current[index] = el}
+                                ref={(el) => {linksRef.current[index] = el}}
                                 className="header-list-item"
                             >
                                 <NavLink
