@@ -1,0 +1,123 @@
+/* --- SECCIÓN FAQ --- */
+.faq-section {
+  max-width: 840px;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+}
+
+.faq-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.faq-title {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  color: var(--primary);
+  margin: 0 0 var(--gap-m) 0;
+  letter-spacing: var(--letter-spacing-s);
+}
+
+.faq-subtitle {
+  font-size: var(--fs-body);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Contenedor de preguntas */
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+/* Tarjeta de cada pregunta */
+.faq-item {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+
+/* Botón / Header interactivo */
+.faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-heading);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  transition: color 200ms ease;
+}
+
+.faq-item:hover .faq-question {
+  color: var(--secondary);
+}
+
+.faq-item.open .faq-question {
+  color: var(--secondary);
+}
+
+/* Ícono desplegable (+ / x) */
+.faq-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--background);
+  color: var(--secondary);
+  flex-shrink: 0;
+  transition: transform 500ms ease, background-color 250ms ease, color 250ms ease;
+}
+
+.faq-item.open .faq-icon {
+  transform: rotate(45deg); /* Gira el '+' para transformarlo en 'x' */
+  background-color: var(--secondary);
+  color: var(--surface);
+}
+
+/* Contenido de la respuesta */
+.faq-answer {
+  padding: 0 1.5rem 1.25rem 1.5rem;
+  animation: faqFadeIn 500ms ease-in-out;
+}
+
+.faq-answer p {
+  max-width: 680px;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Animación sutil de entrada */
+@keyframes faqFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

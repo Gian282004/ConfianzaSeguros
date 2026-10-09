@@ -1,0 +1,185 @@
+.form-container {
+    width: min(100% - 40px, 1000px);
+    margin: 0 auto;
+    padding: 80px 0;
+}
+
+
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 40px;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.form-content legend {
+    padding: 0;
+    color: var(--primary);
+    font-family: var(--font-heading);
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-bold);
+}
+
+.form-description {
+    margin: -10px 0 4px;
+
+    color: var(--text-secondary);
+
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    line-height: 1.6;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.form-field {
+    position: relative;
+}
+
+.form-field--full {
+    grid-column: 1 / -1;
+}
+
+/* 1. Estado por defecto: Label dentro del input */
+.form-field label {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.7;
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    color: var(--text-primary);
+    letter-spacing: 1px;
+    pointer-events: none; /* Permite hacer click a través del label */
+    background-color: var(--surface); /* Tapado limpio del borde */
+    /* Transición suave de posición, tamaño y color */
+    transition: all .2s ease;
+    transform-origin: left top;
+}
+
+/* Ajuste específico si es textarea */
+.form-field:has(textarea) label {
+    top: 20px;
+    transform: none;
+}
+
+.form-field input,
+.form-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    outline: none;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.form-field textarea {
+    resize: none;
+    min-height: 130px;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+    border-color: var(--secondary);
+  
+}
+
+/* 2. Estado Floating: Focus o cuando el input ya tiene texto */
+.form-field:focus-within label,
+.form-field:has(input:not(:placeholder-shown)) label,
+.form-field:has(textarea:not(:placeholder-shown)) label {
+    opacity: 1;
+    color: var(--secondary); /* Resalta con el color del foco */
+    font-size: var(--fs-small);
+    font-weight: var(--fw-semibold);
+    /* Movemos el label hacia la parte superior de la línea del borde */
+    top: 0;
+    transform: translateY(-50%);
+}
+
+
+/* Sobreescribir el color de fondo y texto del autocompletado */
+.form-field input:-webkit-autofill,
+.form-field input:-webkit-autofill:hover, 
+.form-field input:-webkit-autofill:focus,
+.form-field textarea:-webkit-autofill,
+.form-field textarea:-webkit-autofill:hover,
+.form-field textarea:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px var(--surface) inset !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.form-submit {
+    align-self: flex-start;
+
+    padding: 13px 28px;
+
+    border: none;
+    border-radius: var(--radius-sm);
+
+    background: var(--secondary);
+    color: white;
+
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    font-weight: var(--fw-semibold);
+
+    cursor: pointer;
+
+    transition:
+        background 200ms ease,
+        transform 200ms ease,
+        box-shadow 200ms ease;
+}
+
+.form-submit:hover {
+    background: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.form-submit:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 700px) {
+
+    .form-container {
+        width: min(100% - 24px, 1000px);
+        padding: 50px 0;
+    }
+
+    .form-content {
+        padding: 28px 20px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-field--full {
+        grid-column: auto;
+    }
+
+    .form-submit {
+        width: 100%;
+    }
+}
+
+

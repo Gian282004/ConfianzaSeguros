@@ -1,0 +1,13 @@
+/* Esto se hace para empujar el footer abajo del todo y controlar siempre que el contenido sin importar que tanto ocupe en 
+ la pantalla deje abajo al footer
+*/
+.content-container{
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+main{
+    flex-direction: column;
+    flex: 1;
+}

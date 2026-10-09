@@ -1,0 +1,92 @@
+.header{
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-body);
+    background-color: var(--surface);
+    width: 100%;
+    padding: 8px 16px;
+    z-index: 2;
+    transition: transform .5s ease;
+}
+
+.header.hidden{
+    transform: translateY(-100%);
+}
+
+
+
+.header-presentation{
+    display: inline-flex;
+    gap: 16px;
+}
+
+.header-logo-img {
+  width: 50px;
+  height: auto;
+}
+
+.header-presentation-title{
+    font-family: var(--font-heading);
+    font-size: var(--fs-h3);
+    color: var(--primary);
+    align-content: center;
+    letter-spacing: var(--letter-spacing-s);
+}
+
+
+.header-list-items{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.header-list-item a {
+    font-family: var(--font-heading);
+  text-decoration: none;
+  color: var(--text-primary);
+  padding-bottom: 5px;
+  transition: all .2s ease-in-out;
+}
+
+
+.header-list-item a:hover{
+    color: var(--secondary);
+}
+
+.header-list-item a.active{
+     color: var(--secondary);
+}
+
+
+.indicator {
+    position: absolute;
+    left: 0;
+    height: 3px;
+    background: var(--accent);
+    transition: all .3s cubic-bezier(.4,0,.2,1);
+}
+
+
+.header-button{
+    outline: 1px solid var(--secondary);
+    font-size: var(--fs-body);
+    border: none;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    padding: 6px 12px;
+    color: var(--secondary);
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.header-button:hover{
+    transform: scale(1.05);
+}
+
+.header-button:active{
+    transform: scale(.95);
+}

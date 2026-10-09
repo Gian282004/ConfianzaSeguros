@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Work+Sans:wght@400;500;600&display=swap');
+:root {
+  /* Brand */
+    --primary: #001B44;
+    --secondary: #0056D2;
+    --accent: #00A3FF;
+
+    /* Backgrounds */
+    --background: #F4F7FA;
+    --surface: #FFFFFF;
+
+    /* Text */
+    --text-primary: #1B1B1B;
+    --text-secondary: #5D6778;
+
+    /* Borders */
+    --border-color: #D9E2EC;
+
+  /* Tipografía */
+  --font-heading: "Manrope", sans-serif;
+  --font-body: "Work Sans", sans-serif;
+
+  /* Tamaños */
+  --fs-h1: 3rem;
+  --fs-h2: 2rem;
+  --fs-h3: 1.5rem;
+  --fs-body: 1rem;
+  --fs-small: .875rem;
+
+  /* Pesos */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Bordes */
+  --radius-sm: .5rem;
+  --radius-md: .75rem;
+  --radius-lg: 1rem;
+
+  /* Sombras */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.08);
+  --shadow-md: 0 8px 24px rgba(0,0,0,.12);
+
+  /* Espaciado */
+  --letter-spacing-s: 0.5px;
+  --letter-spacing-m: 1px;
+  --letter-spacing-l: 1.5px;
+  --letter-spacing-xl: 2px;
+  
+  /* Gaps */
+  --gap-s: .25rem;
+  --gap-m: .5rem;
+  --gap-l: .5rem;
+
+
+}

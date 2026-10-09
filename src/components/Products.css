@@ -1,0 +1,102 @@
+/* CSS de Métricas y Productos */
+
+.stats-section {
+    background-color: #f8fafc;
+    padding-block: 2.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.stats-container {
+    width: min(100% - 2rem, 1200px);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+
+.stat-card strong {
+    display: block;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-family: var(--font-heading);
+    color: var(--primary);
+}
+
+.stat-card p {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+/* Sección Productos */
+.products-section {
+    padding-block: 5rem;
+}
+
+.products-container {
+    width: min(100% - 2rem, 1200px);
+    margin-inline: auto;
+}
+
+.products-section h2 {
+    text-align: center;
+    font-size: 2.25rem;
+    margin-bottom: 2rem;
+}
+
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.tab-btn {
+    padding: 0.75rem 2rem;
+    border: 1px solid #cbd5e1;
+    background: transparent;
+    border-radius: 999px;
+    font-weight: var(--fw-semibold);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tab-btn.active, .tab-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.product-card {
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+}
+
+.product-card h3 {
+    margin: 0 0 1rem;
+    font-size: 1.15rem;
+}
+
+.whatsapp-link {
+    color: #059669;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.9rem;
+}

@@ -1,0 +1,117 @@
+.hero-background {
+    min-height: 80dvh;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(
+        in oklab,
+        var(--secondary),
+        var(--primary)
+    );
+    color: var(--surface);
+    padding: 20px;
+}
+
+.hero-content {
+    width: min(100% - 2rem, 1200px);
+    margin-inline: auto;
+    padding-block: 4rem;
+}
+
+.hero-content h1 {
+    max-width: 900px;
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 5vw, 4.5rem); 
+    font-weight: var(--fw-bold);
+    line-height: 1.25;                   
+    letter-spacing: -0.02em;             
+}
+.hero-content h1 strong {
+  color: #22d3ee; /* Un azul más claro, celeste o dorado */
+  font-style: normal;
+}
+
+.typing-content {
+    opacity: .9;
+    min-height: 1.2em;
+    margin-block: 1.5rem 2.5rem;         
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 3.5vw, 3rem);
+    font-weight: var(--fw-semibold);
+    line-height: 1.2;
+    color: var(--surface);
+}
+
+.hero-description {
+  max-width: 550px;
+  margin-bottom: 2.5rem;
+  
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.2vw, 1.25rem);
+  line-height: 1.6;
+  color: rgb(255 255 255 / 85%);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+
+.logo-container img{
+   /* Mínimo 280px, ideal 30% de la pantalla, máximo 480px */
+    width: clamp(280px, 30vw, 480px);
+    height: auto;
+    object-fit: contain; /*
+    opacity: 1; /* Suave para no molestar */
+    pointer-events: none; /* Evita interferir con los clics */
+}
+
+/* Estilos base opcionales para los botones */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 1.75rem;
+  border-radius: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: var(--fw-semibold);
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background-color: var(--surface);
+  color: var(--primary);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--surface);
+  border: 1px solid rgb(255 255 255 / 40%);
+}
+
+.btn-secondary:hover {
+  border-color: var(--surface);
+}
+
+/* Ocultar en dispositivos móviles */
+@media (max-width: 768px) {
+    .hero-actions a{
+      padding: 8px 16px;
+    }
+    
+    .hero-content h1{
+      max-width: 500px;
+    }
+
+    .logo-container {
+        display: none;
+    }
+}
