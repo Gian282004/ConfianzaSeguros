@@ -1,7 +1,8 @@
 import './Carrousel.css'
-
 export function Carrousel()
 {
+
+  
     return (
         
 <section className="story">

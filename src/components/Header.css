@@ -11,6 +11,7 @@
     padding: 8px 16px;
     z-index: 2;
     transition: transform .5s ease;
+    overflow: hidden;
 }
 
 .header.hidden{

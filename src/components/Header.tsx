@@ -14,6 +14,23 @@ export function Header() {
     })
 
     const [isHeaderVisible, setIsHeaderVisible] = useState(true)
+    const [isMobile, setIsMobile] = useState(
+    () => window.matchMedia("(max-width: 1028px)").matches
+);
+
+useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1028px)");
+
+    function handleChange(event: MediaQueryListEvent) {
+        setIsMobile(event.matches);
+    }
+
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => {
+        mediaQuery.removeEventListener("change", handleChange);
+    };
+}, []);
 
 
     useEffect(() => {
@@ -34,7 +51,7 @@ export function Header() {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
-   
+
 
     useEffect(() => {
         if (location.hash) {
@@ -83,59 +100,64 @@ export function Header() {
 
     const headerClassName = `header ${!isHeaderVisible ? 'hidden' : ''}`
     return (
-        <header className={headerClassName}>
-            <div>
-                <div className="header-logo">
-                    <div className="header-presentation">
-                        <img
-                            className="header-logo-img"
-                            src={logo}
-                            alt="Logo de Confianza Seguros"
-                        />
-                        <h3 className="header-presentation-title">Confianza Seguros</h3>
+        <>
+           
+           {!isMobile &&  <header className={headerClassName}>
+                <div>
+                    <div className="header-logo">
+                        <div className="header-presentation">
+                            <img
+                                className="header-logo-img"
+                                src={logo}
+                                alt="Logo de Confianza Seguros"
+                            />
+                            <h3 className="header-presentation-title">Confianza Seguros</h3>
+                        </div>
+
                     </div>
-
                 </div>
-            </div>
-            <div>
-                <nav>
-                    <ul className="header-list-items">
-                        {navItems.map((item, index) => (
-                            <li
-                                key={item.path}
-                                ref={(el) => {linksRef.current[index] = el}}
-                                className="header-list-item"
-                            >
-                                <NavLink
-                                    to={item.path}
-                                    end={item.path === "/"}
-                                    className={({ isActive }) => {
-                                        if (item.path === `/${Path.PRODUCTOS}`) {
-                                            return location.hash ===Path.PRODUCTOS ? "active" : "";
-                                        }
-
-                                        return isActive && !location.hash ? "active" : "";
-                                    }}
+                <div>
+                    <nav>
+                        <ul className="header-list-items">
+                            {navItems.map((item, index) => (
+                                <li
+                                    key={item.path}
+                                    ref={(el) => { linksRef.current[index] = el }}
+                                    className="header-list-item"
                                 >
-                                    {item.name}
-                                </NavLink>
-                            </li>
-                        ))}
-                    </ul>
+                                    <NavLink
+                                        to={item.path}
+                                        end={item.path === "/"}
+                                        className={({ isActive }) => {
+                                            if (item.path === `/${Path.PRODUCTOS}`) {
+                                                return location.hash === Path.PRODUCTOS ? "active" : "";
+                                            }
 
-                    <span
-                        className="indicator"
-                        style={{
-                            transform: `translateX(${indicator.left}px)`,
-                            width: `${indicator.width}px`
-                        }}
-                    />
-                </nav>
-            </div>
-            <div>
-                <Link to={Path.PREGUNTAS_FRECUENTES}><button className="header-button">Preguntas frecuentes</button></Link>
-            </div>
+                                            return isActive && !location.hash ? "active" : "";
+                                        }}
+                                    >
+                                        {item.name}
+                                    </NavLink>
+                                </li>
+                            ))}
+                        </ul>
 
-        </header>
+                        <span
+                            className="indicator"
+                            style={{
+                                transform: `translateX(${indicator.left}px)`,
+                                width: `${indicator.width}px`
+                            }}
+                        />
+                    </nav>
+                </div>
+                <div>
+                    <Link to={Path.PREGUNTAS_FRECUENTES}><button className="header-button">Preguntas frecuentes</button></Link>
+                </div>
+
+            </header>}
+
+        </>
+
     )
 }
