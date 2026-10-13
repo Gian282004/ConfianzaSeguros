@@ -6,6 +6,7 @@ import {Footer} from './components/Footer.tsx'
 import './App.css'
 import { HomePage } from './pages/Home.tsx'
 import { ContactPage } from './pages/Contact.tsx'
+import { ScrollToTop } from './components/ScrollTop.tsx'
 function App() {
 
 
@@ -14,6 +15,7 @@ function App() {
     <div className='content-container'>
     <Header/>
     <main>
+      <ScrollToTop/>
     <Routes>
       <Route path='/' element={<HomePage/>}/>
       <Route path='/contacto' element={<ContactPage/>}/>
