@@ -1,0 +1,243 @@
+
+.story {
+  height: 400vh;
+  position: relative;
+  background: var(--background);
+  
+  view-timeline-name: --story-timeline;
+  view-timeline-axis: block;
+}
+
+/* Ventana visible del carrusel */
+.scene {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+/* Recorrido horizontal */
+.track {
+  display: flex;
+  align-items: center;
+  gap: 3vw;
+  width: max-content;
+  height: 100%;
+  padding-inline: 6vw;
+  animation: story-slide linear both;
+  animation-timeline: --story-timeline;
+  animation-range: contain 0% contain 100%;
+}
+
+/* Cada tarjeta */
+.panel {
+  position: relative;
+  flex: 0 0 78vw;
+  height: min(68vh, 560px);
+  min-height: 390px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: clamp(2rem, 5vw, 5rem);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+}
+
+/* Numeración */
+.panel__number {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--letter-spacing-m);
+  color: var(--text-secondary);
+}
+
+/* Contenido */
+.panel__content {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+}
+
+.panel__eyebrow {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+
+  color: var(--secondary);
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--letter-spacing-l);
+}
+
+.panel h2 {
+  margin: 0 0 1.5rem;
+  color: var(--primary);
+
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.1;
+  letter-spacing: -2px;
+}
+
+.panel h2 span {
+  color: var(--secondary);
+}
+
+.panel p {
+  max-width: 540px;
+  margin: 0;
+
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.9;
+}
+
+/* Etiqueta inferior */
+.panel__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+
+  margin-top: 2rem;
+  padding: 0.8rem 1rem;
+
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  color: var(--primary);
+
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+}
+
+.panel__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px rgb(0 163 255 / 35%);
+}
+
+/* Letra decorativa de fondo */
+.panel__decoration {
+  position: absolute;
+  right: 2%;
+  bottom: -22%;
+
+  color: var(--primary);
+  opacity: 0.045;
+
+  font-family: var(--font-heading);
+  font-size: clamp(18rem, 32vw, 34rem);
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Variantes de cada tarjeta */
+.panel--mission {
+  border-top: 5px solid var(--secondary);
+    background:
+    linear-gradient(
+      135deg,
+      var(--surface) 55%,
+      #dcedfd 100%
+    );
+}
+
+.panel--vision {
+  border-top: 5px solid var(--accent);
+  background:
+    linear-gradient(
+      135deg,
+      var(--surface) 55%,
+      #EAF5FF 100%
+    );
+}
+
+.panel--objectives {
+  border-top: 5px solid var(--primary);
+  background:
+    linear-gradient(
+      135deg,
+      var(--surface) 55%,
+      #EDF2F8 100%
+    );
+}
+
+/* Scroll vertical -> desplazamiento horizontal */
+@keyframes story-slide {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(
+      calc(-100% + 100vw)
+    );
+  }
+}
+
+/* Adaptación a móviles */
+@media (max-width: 700px) {
+  .scene {
+    height: 85vh;
+  }
+
+  .track {
+    gap: 1rem;
+    padding-inline: 6vw;
+  }
+
+  .panel {
+    flex-basis: 88vw;
+    height: 65vh;
+    min-height: 400px;
+    padding: 2rem 1.5rem;
+  }
+
+  .panel__number {
+    top: 1.25rem;
+    right: 1.25rem;
+  }
+
+  .panel h2 {
+    font-size: clamp(2.3rem, 10vw, 3.5rem);
+    letter-spacing: -1px;
+  }
+
+  .panel p {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .panel__eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+
+  .panel__decoration {
+    right: -5%;
+    bottom: -8%;
+    font-size: 18rem;
+  }
+}
+
+/* Respeto por accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+}
