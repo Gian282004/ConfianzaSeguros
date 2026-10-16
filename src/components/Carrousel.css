@@ -192,9 +192,6 @@
 
 /* Adaptación a móviles */
 @media (max-width: 700px) {
-  .scene {
-    height: 85vh;
-  }
 
   .track {
     gap: 1rem;
