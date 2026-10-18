@@ -1,7 +1,7 @@
 import { useState } from "react";
 import '../components/Products.css'
 import { categories } from "../consts";
-import type { CategoryKey } from "../types";
+import { Path, type CategoryKey } from "../types";
  
 
 export function Products() {
@@ -29,7 +29,7 @@ export function Products() {
       </section>
 
       {/* 2. SECCIÓN DE PRODUCTOS */}
-      <section id="productos" className="products-section">
+      <section id={Path.PRODUCTOS.slice(1)} className="products-section">
         <div className="products-container">
           <h2>Nuestras Soluciones</h2>
 

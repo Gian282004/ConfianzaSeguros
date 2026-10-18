@@ -57,9 +57,9 @@
   visibility: hidden;
   pointer-events: none;
   transition:
-    transform 400ms cubic-bezier(.22, 1, .36, 1),
-    opacity 250ms ease,
-    visibility 0s linear 400ms;
+    transform 500ms cubic-bezier(.22, 1, .36, 1),
+    opacity 500ms ease,
+    visibility 500ms ;
 }
 
 .menu-content.open {
@@ -68,9 +68,9 @@
   visibility: visible;
   pointer-events: auto;
   transition:
-    transform 400ms cubic-bezier(.22, 1, .36, 1),
-    opacity 250ms ease,
-    visibility 0s;
+    transform 500ms cubic-bezier(.22, 1, .36, 1),
+    opacity 500ms ease,
+    visibility 500ms;
 }
 
 /* Navegación */
@@ -121,7 +121,6 @@
   border-radius: 999px;
   background: var(--secondary);
   transform-origin: center;
-  transition: transform 250ms ease;
 }
 
 .header-mobile-list-item a.active {

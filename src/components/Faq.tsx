@@ -1,5 +1,6 @@
 import { useState } from "react";
 import './Faq.css'
+import { Path } from "../types";
  const FAQ_DATA = {
   siniestro_accidente: {
     titulo: "¿Qué debo hacer inmediatamente en caso de sufrir un accidente de tránsito?",
@@ -38,7 +39,7 @@ export function FrecuentAskedQuestions()
   };
 
   return (
-  <section className="faq-section">
+  <section id={Path.PREGUNTAS_FRECUENTES.slice(1)}className="faq-section">
       <div className="faq-header">
         <h2 className="faq-title">Preguntas Frecuentes</h2>
         <p className="faq-subtitle">

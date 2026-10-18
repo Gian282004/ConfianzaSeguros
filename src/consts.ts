@@ -1,6 +1,7 @@
  export const navItems = [
     { name: "Inicio", path: "/" },
     { name: "Productos", path: "/#productos" },
+    { name: "Preguntas frecuentes", path: "/#preguntas-frecuentes" },
     { name: "Siniestros", path: "/siniestros" },
     { name: "Nuestra historia", path: "/historia" },
     { name: "Contactanos", path: "/contacto" },

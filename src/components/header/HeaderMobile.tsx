@@ -1,27 +1,28 @@
 import { useEffect, useRef, useState } from "react"
 import '../header/HeaderMobile.css'
 import logo from '../../assets/logo.png'
-import { NavLink } from "react-router"
 import { navItems } from "../../consts"
-import { Path } from "../../types"
+import { scrollToHash } from "../../utils/scrollToHash"
+import { AppNavLink } from "../AppNavLink"
+
 export function HeaderMobile() {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false)
-    const headerRef=useRef<HTMLElement>(null)
+    const headerRef = useRef<HTMLElement>(null)
 
-    useEffect(()=>{
-     const header=headerRef.current
- 
-      if(!header) return
-    const observer=new ResizeObserver(([entry])=>{
-      header.style.setProperty("--header-height", `${entry.borderBoxSize[0].blockSize}px`)
-    })
+    useEffect(() => {
+        const header = headerRef.current
 
-    observer.observe(header)
-    return () =>{
-        observer.disconnect()
-    }
-    },[])
+        if (!header) return
+        const observer = new ResizeObserver(([entry]) => {
+            header.style.setProperty("--header-height", `${entry.borderBoxSize[0].blockSize}px`)
+        })
+
+        observer.observe(header)
+        return () => {
+            observer.disconnect()
+        }
+    }, [])
 
     const buttonClassName = `toggle-menu ${isMenuOpen ? 'open' : ''}`
     return (
@@ -49,45 +50,37 @@ export function HeaderMobile() {
                 </div>
 
             </div>
-           
-                <aside  className={`menu-content ${isMenuOpen ? "open" : ""}`}>
-                     <button
-                className={buttonClassName}
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                aria-expanded={isMenuOpen}
-                aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
-            >
-        
-            </button>
-                    <nav>
-                        <ul className="header-mobile-list-items">
-                            {navItems.map((item) => (
-                                <li
-                                    key={item.path}
 
-                                    className="header-mobile-list-item"
-                                >
-                                    <NavLink
-                                        onClick={()=> setIsMenuOpen(false)}
-                                        to={item.path}
-                                        end={item.path === "/"}
-                                        className={({ isActive }) => {
-                                            if (item.path === `/${Path.PRODUCTOS}`) {
-                                                return location.hash === Path.PRODUCTOS ? "active" : "";
-                                            }
+            <aside className={`menu-content ${isMenuOpen ? "open" : ""}`}>
+                <button
+                    className={buttonClassName}
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    aria-expanded={isMenuOpen}
+                    aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+                >
 
-                                            return isActive && !location.hash ? "active" : "";
-                                        }}
-                                    >
-                                        {item.name}
-                                    </NavLink>
-                                </li>
-                            ))}
-                        </ul>
+                </button>
+                <nav>
+                    <ul className="header-mobile-list-items">
+                        {navItems.map((item) => (
+                            <li
+                                key={item.path}
+                                className="header-mobile-list-item"
+                            >
+                                <AppNavLink name={item.name} path={item.path} onClick={() => {
+
+                                    if (location.hash) {
+                                        scrollToHash(item.path.slice(1));
+                                    }
+                                    setIsMenuOpen(false)
+                                }} />
+                            </li>
+                        ))}
+                    </ul>
 
 
-                    </nav>
-                </aside>
+                </nav>
+            </aside>
         </header>
     )
 }
