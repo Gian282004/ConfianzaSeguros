@@ -1,11 +1,11 @@
 import { Link, NavLink, useLocation } from "react-router"
-import '../components/Header.css'
-import { navItems } from "../consts";
-import { Path } from "../types";
+import '../header/HeaderDesktop.css'
+import { navItems } from "../../consts";
+import { Path } from "../../types";
 
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 import { useEffect, useRef, useState } from "react";
-export function Header() {
+export function HeaderDesktop() {
     const location = useLocation();
     const linksRef = useRef<(HTMLElement | null)[]>([]);
     const [indicator, setIndicator] = useState({
@@ -14,23 +14,6 @@ export function Header() {
     })
 
     const [isHeaderVisible, setIsHeaderVisible] = useState(true)
-    const [isMobile, setIsMobile] = useState(
-    () => window.matchMedia("(max-width: 1028px)").matches
-);
-
-useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 1028px)");
-
-    function handleChange(event: MediaQueryListEvent) {
-        setIsMobile(event.matches);
-    }
-
-    mediaQuery.addEventListener("change", handleChange);
-
-    return () => {
-        mediaQuery.removeEventListener("change", handleChange);
-    };
-}, []);
 
 
     useEffect(() => {
@@ -51,17 +34,6 @@ useEffect(() => {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
-
-
-    useEffect(() => {
-        if (location.hash) {
-            const element = document.querySelector(location.hash);
-
-            element?.scrollIntoView({
-                behavior: "smooth"
-            });
-        }
-    }, [location]);
 
     function updateIndicator() {
         let active;
@@ -100,9 +72,9 @@ useEffect(() => {
 
     const headerClassName = `header ${!isHeaderVisible ? 'hidden' : ''}`
     return (
-        <>
+       
            
-           {!isMobile &&  <header className={headerClassName}>
+             <header className={headerClassName}>
                 <div>
                     <div className="header-logo">
                         <div className="header-presentation">
@@ -155,9 +127,6 @@ useEffect(() => {
                     <Link to={Path.PREGUNTAS_FRECUENTES}><button className="header-button">Preguntas frecuentes</button></Link>
                 </div>
 
-            </header>}
-
-        </>
-
+            </header>
     )
 }
