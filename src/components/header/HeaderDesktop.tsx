@@ -19,40 +19,47 @@ export function HeaderDesktop({
         width: 0
     })
 
+function updateIndicator() {
+        // Usamos requestAnimationFrame para asegurar que el DOM ya se pintó visualmente
+        requestAnimationFrame(() => {
+            let active;
 
-    function updateIndicator() {
-        let active;
+            if (location.hash) {
+                active = navItems.findIndex(
+                    item => item.path === `/${location.hash}`
+                );
+            } else {
+                active = navItems.findIndex(
+                    item => item.path === location.pathname
+                );
+            }
 
-        if (location.hash) {
-            active = navItems.findIndex(
-                item => item.path === `/${location.hash}`
-            );
-        } else {
-            active = navItems.findIndex(
-                item => item.path === location.pathname
-            );
-        }
+            const element = linksRef.current[active];
 
-        const element = linksRef.current[active];
+            if (element) {
+                const elementRect = element.getBoundingClientRect();
 
-        if (element) {
-            const elementRect = element.getBoundingClientRect();
-
-            setIndicator({
-                left: elementRect.left,
-                width: elementRect.width
-            });
-        }
+                setIndicator({
+                    left: elementRect.left,
+                    width: elementRect.width
+                });
+            }
+        });
     }
 
     useEffect(() => {
-        updateIndicator()
+        // Esperamos a que las fuentes carguen y luego actualizamos el indicador
+        document.fonts.ready.then(() => {
+            updateIndicator();
+        });
 
-        window.addEventListener('resize', updateIndicator)
+        window.addEventListener('resize', updateIndicator);
+        window.addEventListener('load', updateIndicator);
 
-        return () =>
-            window.removeEventListener('resize', updateIndicator)
-
+        return () => {
+            window.removeEventListener('resize', updateIndicator);
+            window.removeEventListener('load', updateIndicator);
+        };
     }, [location]);
 
     return (
