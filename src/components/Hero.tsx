@@ -65,7 +65,7 @@ const typingRef = useRef<HTMLSpanElement>(null);
 <section className="hero-background">
   <div className='hero-content'>
     <h1>La tranquilidad de saber que estás <strong>bien protegido.</strong></h1>
-    <p className='typing-content'>
+    <p translate='no' className='typing-content notranslate'>
       <span ref={typingRef}></span>
     </p>
     <p className='hero-description'>
