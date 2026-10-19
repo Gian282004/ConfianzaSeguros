@@ -5,7 +5,12 @@ import { navItems } from "../../consts"
 import { scrollToHash } from "../../utils/scrollToHash"
 import { AppNavLink } from "../AppNavLink"
 
-export function HeaderMobile() {
+export function HeaderMobile({
+    headerClassName,
+}: {
+    headerClassName: string;
+}) {
+
 
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const headerRef = useRef<HTMLElement>(null)
@@ -24,9 +29,22 @@ export function HeaderMobile() {
         }
     }, [])
 
+useEffect(() => {
+    if (isMenuOpen) {
+        document.body.style.overflow = 'hidden'
+    } else {
+        document.body.style.overflow = '' // Resetea al valor que tuviera por CSS
+    }
+
+    // Cleanup por si el componente se desmonta con el menú abierto
+    return () => {
+        document.body.style.overflow = ''
+    }
+}, [isMenuOpen])
+
     const buttonClassName = `toggle-menu ${isMenuOpen ? 'open' : ''}`
     return (
-        <header ref={headerRef} className="header-mobile">
+        <header ref={headerRef} className={headerClassName}>
             <button
                 className={buttonClassName}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}

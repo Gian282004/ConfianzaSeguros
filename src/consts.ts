@@ -5,7 +5,6 @@
     { name: "Siniestros", path: "/siniestros" },
     { name: "Nuestra historia", path: "/historia" },
     { name: "Contactanos", path: "/contacto" },
-    { name: "Noticias", path: "/noticias" }
 ];
 
 export const categories = {

@@ -29,6 +29,15 @@ export function Footer() {
                             }
                         }}
                     />
+                     <AppNavLink
+                        name="Preguntas frecuentes"
+                        path={`/${Path.PREGUNTAS_FRECUENTES}`}
+                        onClick={() => {
+                            if (location.hash) {
+                                scrollToHash(Path.PREGUNTAS_FRECUENTES);
+                            }
+                        }}
+                    />
 
                     <AppNavLink name="Siniestros" path={Path.SINIESTROS} />
 
