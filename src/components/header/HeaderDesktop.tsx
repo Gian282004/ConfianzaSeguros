@@ -20,7 +20,6 @@ export function HeaderDesktop({
     })
 
 function updateIndicator() {
-        // Usamos requestAnimationFrame para asegurar que el DOM ya se pintó visualmente
         requestAnimationFrame(() => {
             let active;
 
@@ -37,11 +36,16 @@ function updateIndicator() {
             const element = linksRef.current[active];
 
             if (element) {
-                const elementRect = element.getBoundingClientRect();
-
+                // Usamos offsetLeft y offsetWidth para medir respecto al contenedor <nav>
                 setIndicator({
-                    left: elementRect.left,
-                    width: elementRect.width
+                    left: element.offsetLeft,
+                    width: element.offsetWidth
+                });
+            } else {
+                // Si no hay elemento activo (ej: /noticias), ocultamos el indicador con ancho 0
+                setIndicator({
+                    left: 0,
+                    width: 0
                 });
             }
         });

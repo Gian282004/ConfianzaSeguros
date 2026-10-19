@@ -38,9 +38,6 @@ export function Footer() {
                             }
                         }}
                     />
-
-                    <AppNavLink name="Siniestros" path={Path.SINIESTROS} />
-
                     <AppNavLink
                         name="Nuestra historia"
                         path={Path.NUESTRA_HISTORIA}

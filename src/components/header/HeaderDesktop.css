@@ -38,6 +38,10 @@
     letter-spacing: var(--letter-spacing-s);
 }
 
+nav{
+    position: relative;
+}
+
 
 .header-list-items{
     display: flex;
@@ -65,10 +69,10 @@
 
 .indicator {
     position: absolute;
-    left: 0;
+    bottom: 0;
     height: 3px;
-    background: var(--accent);
-    transition: all .3s cubic-bezier(.4,0,.2,1);
+    background-color: var(--accent);
+    transition: transform 0.3s ease, width 0.3s ease;
 }
 
 
