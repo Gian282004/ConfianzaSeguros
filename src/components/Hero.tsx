@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef} from 'react';
 import '../components/Hero.css'
 import logo from "../assets/logo.png";
 import { NavLink } from 'react-router';

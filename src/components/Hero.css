@@ -37,10 +37,14 @@
     min-height: 1.2em;
     margin-block: 1.5rem 2.5rem;         
     font-family: var(--font-heading);
+    min-width: 240px; /* Ancho reservado exacto para que entre la frase más larga sin ensanchar de más */
+    display: inline-flex; /* Reemplaza al inline-block para evitar el salto de línea */
+    align-items: center;
     font-size: clamp(1.75rem, 3.5vw, 3rem);
     font-weight: var(--fw-semibold);
     line-height: 1.2;
     color: var(--surface);
+    
 }
 
 .hero-description {
