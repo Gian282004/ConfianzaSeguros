@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import '../components/Hero.css'
 import logo from "../assets/logo.png";
 import { NavLink } from 'react-router';
@@ -15,52 +15,50 @@ const phrases = [
   'Tu campo.'
 ];
 
-const [phraseIndex, setPhraseIndex] = useState(0);
-const [charIndex, setCharIndex] = useState(0);
-const [isDeleting, setIsDeleting]=useState(false)
-const [isWaiting, setIsWaiting]=useState(false)
+const typingRef = useRef<HTMLSpanElement>(null);
 
+    useEffect(() => {
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let timeoutId: NodeJS.Timeout;
 
+        const animate = () => {
+            const currentPhrase = phrases[phraseIndex];
 
+            if (!typingRef.current) return;
 
-useEffect(() => {
-    const currentPhrase = phrases[phraseIndex];
+            if (!isDeleting) {
+                // Escribiendo
+                typingRef.current.textContent = currentPhrase.slice(0, charIndex + 1);
+                charIndex++;
 
-    if (isWaiting) {
-        const timer = setTimeout(() => {
-            setIsWaiting(false);
-            setIsDeleting(true);
-        }, 1500);
-
-        return () => clearTimeout(timer);
-    }
-
-    const timer = setTimeout(() => {
-
-        if (!isDeleting) {
-
-            if (charIndex < currentPhrase.length) {
-                setCharIndex(prev => prev + 1);
+                if (charIndex === currentPhrase.length) {
+                    // Pausa antes de empezar a borrar
+                    isDeleting = true;
+                    timeoutId = setTimeout(animate, 1500);
+                    return;
+                }
+                timeoutId = setTimeout(animate, 100);
             } else {
-                setIsWaiting(true);
+                // Borrando
+                typingRef.current.textContent = currentPhrase.slice(0, charIndex - 1);
+                charIndex--;
+
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    timeoutId = setTimeout(animate, 500);
+                    return;
+                }
+                timeoutId = setTimeout(animate, 50);
             }
+        };
 
-        } else {
+        timeoutId = setTimeout(animate, 100);
 
-            if (charIndex > 0) {
-                setCharIndex(prev => prev - 1);
-            } else {
-                setIsDeleting(false);
-                setPhraseIndex(prev => (prev + 1) % phrases.length);
-            }
-
-        }
-
-    }, isDeleting ? 50 : 100);
-
-    return () => clearTimeout(timer);
-
-}, [charIndex, phraseIndex, isDeleting, isWaiting]);
+        return () => clearTimeout(timeoutId);
+    }, []);
 
 
     return (
@@ -68,7 +66,7 @@ useEffect(() => {
   <div className='hero-content'>
     <h1>La tranquilidad de saber que estás <strong>bien protegido.</strong></h1>
     <p className='typing-content'>
-      {phrases[phraseIndex].slice(0, charIndex)}
+      <span ref={typingRef}></span>
     </p>
     <p className='hero-description'>
       Asesoramiento personalizado para encontrar el seguro que necesitás.
