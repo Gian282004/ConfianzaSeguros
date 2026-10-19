@@ -1,7 +1,7 @@
 import { useState } from "react";
 import './Faq.css'
 import { Path } from "../types";
- const FAQ_DATA = {
+const FAQ_DATA = {
   siniestro_accidente: {
     titulo: "¿Qué debo hacer inmediatamente en caso de sufrir un accidente de tránsito?",
     paragraph: "Tomá los datos del otro conductor (nombre, DNI, teléfono, patente y aseguradora), sacá fotos de los vehículos y del lugar, y realizá la denuncia administrativa en tu compañía dentro de las 72 horas hábiles."
@@ -28,9 +28,8 @@ import { Path } from "../types";
   }
 };
 
-export function FrecuentAskedQuestions()
-{
- // Guardamos la CLAVE seleccionada (por ej: 'siniestro_accidente' o null)
+export function FrecuentAskedQuestions() {
+  // Guardamos la CLAVE seleccionada (por ej: 'siniestro_accidente' o null)
   const [activeKey, setActiveKey] = useState<string | null>(null);
 
   const handleToggle = (key: string) => {
@@ -39,7 +38,7 @@ export function FrecuentAskedQuestions()
   };
 
   return (
-  <section id={Path.PREGUNTAS_FRECUENTES.slice(1)}className="faq-section">
+    <section id={Path.PREGUNTAS_FRECUENTES.slice(1)} className="faq-section">
       <div className="faq-header">
         <h2 className="faq-title">Preguntas Frecuentes</h2>
         <p className="faq-subtitle">
@@ -76,11 +75,12 @@ export function FrecuentAskedQuestions()
                 </span>
               </button>
 
-              {isOpen && (
+
+              <div className={`faq-answer-container ${isOpen ? "open" : ""}`}>
                 <div className="faq-answer">
                   <p>{item.paragraph}</p>
                 </div>
-              )}
+              </div>
             </div>
           );
         })}
