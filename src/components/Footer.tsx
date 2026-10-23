@@ -59,9 +59,9 @@ export function Footer() {
                 <article className="footer-content-item">
                     <h3>Productores Asesores</h3>
                     <p>Martin Ballesteros</p>
-                    <small>Matrícula SSN N.º 44323</small>
+                    <small>Matrícula SSN N.º 63788</small>
                     <p>Nayla Fernández</p>
-                    <small>Matrícula SSN N.º 44323</small>
+                    <small>Matrícula SSN N.º 103984</small>
                 </article>
 
             </section>

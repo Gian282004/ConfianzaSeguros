@@ -19,7 +19,7 @@ export function HeaderDesktop({
         width: 0
     })
 
-function updateIndicator() {
+    function updateIndicator() {
         requestAnimationFrame(() => {
             let active;
 
@@ -43,10 +43,10 @@ function updateIndicator() {
                 });
             } else {
                 // Si no hay elemento activo (ej: /noticias), ocultamos el indicador con ancho 0
-                setIndicator({
-                    left: 0,
+                setIndicator((prev) => ({
+                    left: prev.left,
                     width: 0
-                });
+                }));
             }
         });
     }
@@ -104,13 +104,15 @@ function updateIndicator() {
                         ))}
                     </ul>
 
-                    <span
-                        className="indicator"
-                        style={{
-                            transform: `translateX(${indicator.left}px)`,
-                            width: `${indicator.width}px`
-                        }}
-                    />
+
+                        <span
+                            className="indicator"
+                            style={{
+                                transform: `translateX(${indicator.left}px)`,
+                                width: `${indicator.width}px`
+                            }}
+                        />
+
                 </nav>
             </div>
             <div>

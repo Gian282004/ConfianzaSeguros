@@ -1,185 +1,319 @@
+/* ============ Contenedor ============ */
 .form-container {
-    width: min(100% - 40px, 1000px);
-    margin: 0 auto;
-    padding: 80px 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 3rem 1.25rem;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(0, 163, 255, .12), transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(0, 86, 210, .12), transparent 40%),
+    var(--background);
+  font-family: var(--font-body);
+  color: var(--text-primary);
 }
-
-
-
+.contact-form {
+  width: 100%;
+  max-width: 680px;
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  animation: card-in .8s var(--ease-out) both;
+}
+/* Barra de acento animada arriba */
+.contact-form::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent), var(--secondary));
+  background-size: 300% 100%;
+  animation: gradient-flow 6s linear infinite;
+}
+@keyframes card-in {
+  from { opacity: 0;}
+  to   { opacity: 1;}
+}
+@keyframes gradient-flow {
+  to { background-position: -300% 0; }
+}
+/* ============ Fieldset ============ */
 .form-content {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    padding: 40px;
-    background: var(--surface);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  transition: opacity var(--dur-base) var(--ease-out);
 }
-
+.form-content:disabled {
+  opacity: .7;
+  cursor: progress;
+}
 .form-content legend {
-    padding: 0;
-    color: var(--primary);
-    font-family: var(--font-heading);
-    font-size: var(--fs-h2);
-    font-weight: var(--fw-bold);
+  font-family: var(--font-heading);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  color: var(--primary);
+  letter-spacing: var(--letter-spacing-s);
+  padding: 0;
+  margin-bottom: var(--gap-m);
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fade-slide .6s var(--ease-out) .1s both;
 }
-
 .form-description {
-    margin: -10px 0 4px;
-
-    color: var(--text-secondary);
-
-    font-family: var(--font-body);
-    font-size: var(--fs-body);
-    line-height: 1.6;
+  color: var(--text-secondary);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  margin: 0 0 2rem;
+  animation: fade-slide .6s var(--ease-out) .2s both;
 }
-
+@keyframes fade-slide {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+/* ============ Grid ============ */
 .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem 1.1rem;
 }
-
+@media (max-width: 560px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .contact-form { padding: 1.75rem 1.25rem; }
+}
+/* Entrada escalonada de cada campo */
 .form-field {
-    position: relative;
+  position: relative;
+  animation: fade-slide .6s var(--ease-out) both;
 }
-
+.form-field:nth-child(1) { animation-delay: .25s; }
+.form-field:nth-child(2) { animation-delay: .3s; }
+.form-field:nth-child(3) { animation-delay: .35s; }
+.form-field:nth-child(4) { animation-delay: .4s; }
+.form-field:nth-child(5) { animation-delay: .45s; }
 .form-field--full {
-    grid-column: 1 / -1;
+  grid-column: 1 / -1;
 }
-
-/* 1. Estado por defecto: Label dentro del input */
+/* ============ Floating labels ============ */
 .form-field label {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: 0.7;
-    font-family: var(--font-body);
-    font-size: var(--fs-body);
-    color: var(--text-primary);
-    letter-spacing: 1px;
-    pointer-events: none; /* Permite hacer click a través del label */
-    background-color: var(--surface); /* Tapado limpio del borde */
-    /* Transición suave de posición, tamaño y color */
-    transition: all .2s ease;
-    transform-origin: left top;
+  position: absolute;
+  left: 1rem;
+  top: 1.05rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  pointer-events: none;
+  transform-origin: left top;
+  transition:
+    transform var(--dur-base) var(--ease-spring),
+    color var(--dur-fast) ease,
+    background-color var(--dur-fast) ease;
+  z-index: 1;
+  padding: 0 .3rem;
+  margin-left: -.3rem;
+  border-radius: 4px;
 }
-
-/* Ajuste específico si es textarea */
-.form-field:has(textarea) label {
-    top: 20px;
-    transform: none;
-}
-
 .form-field input,
 .form-field textarea {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 13px 15px;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    background: var(--surface);
-    color: var(--text-primary);
-    font-family: var(--font-body);
-    font-size: var(--fs-body);
-    outline: none;
-    transition: border-color 200ms ease, box-shadow 200ms ease;
+  width: 100%;
+  font: inherit;
+  font-size: var(--fs-body);
+  color: var(--text-primary);
+  background: #fbfdff;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.35rem 1rem .6rem;
+  outline: none;
+  transition:
+    border-color var(--dur-fast) ease,
+    box-shadow var(--dur-fast) ease,
+    background-color var(--dur-fast) ease,
+    transform var(--dur-fast) var(--ease-out);
+  -webkit-appearance: none;
+  appearance: none;
 }
-
+.form-field input {
+  height: 3.5rem;
+}
 .form-field textarea {
-    resize: none;
-    min-height: 130px;
+  min-height: 9rem;
+  resize: none;
+  line-height: 1.5;
+  padding-top: 1.6rem;
 }
-
+/* Label flotante: cuando el input está vacío y sin foco queda "adentro" */
+/* Cuando hay foco o contenido, sube y se achica */
+.form-field:has(input:not(:placeholder-shown)) label,
+.form-field:has(textarea:not(:placeholder-shown)) label,
+.form-field:focus-within label {
+  transform: translate(0, -.95rem) scale(.78);
+  color: var(--secondary);
+  background-color: var(--surface);
+}
+/* Fallback para navegadores sin :has() */
+.form-field:focus-within label { color: var(--secondary); }
 .form-field input:focus,
 .form-field textarea:focus {
-    border-color: var(--secondary);
-  
+  border-color: var(--accent);
+  background: var(--surface);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-1px);
+}
+.form-field:focus-within label {
+  color: var(--secondary);
+}
+/* Hover sutil */
+.form-field input:hover:not(:focus),
+.form-field textarea:hover:not(:focus) {
+  border-color: #b8c7d9;
+}
+/* Error de validación (solo después de interactuar) */
+.form-field input:user-invalid,
+.form-field textarea:user-invalid {
+  border-color: var(--error);
+  animation: shake .4s var(--ease-out);
+}
+.form-field input:user-invalid ~ label,
+.form-field textarea:user-invalid ~ label,
+.form-field:has(:user-invalid) label {
+  color: var(--error);
+}
+.form-field:has(:user-invalid) label {
+  color: var(--error);
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-6px); }
+  40%      { transform: translateX(6px); }
+  60%      { transform: translateX(-4px); }
+  80%      { transform: translateX(4px); }
+}
+/* ============ Botón ============ */
+.form-submit {
+  position: relative;
+  overflow: hidden;
+  margin-top: 2rem;
+  width: 100%;
+  height: 3.5rem;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-heading);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--letter-spacing-m);
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(120deg, var(--primary), var(--secondary) 65%, var(--accent));
+  background-size: 200% 100%;
+  box-shadow: 0 10px 24px rgba(0, 86, 210, .28);
+  transition:
+    background-position .6s var(--ease-out),
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+  animation: fade-slide .6s var(--ease-out) .5s both;
+}
+/* Brillo que cruza el botón */
+.form-submit::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, .35), transparent);
+  transform: skewX(-20deg);
+  transition: left .7s var(--ease-out);
+}
+.form-submit:hover:not(:disabled) {
+  background-position: 100% 0;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(0, 86, 210, .36);
+}
+.form-submit:hover:not(:disabled)::after {
+  left: 125%;
+}
+.form-submit:active:not(:disabled) {
+  transform: translateY(0) scale(.98);
+}
+.form-submit:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-glow), 0 10px 24px rgba(0, 86, 210, .28);
+}
+.form-submit:disabled {
+  cursor: wait;
+  opacity: .85;
+}
+/* Estado de carga: puntos animados */
+.form-submit:disabled::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: .6rem;
+  vertical-align: -2px;
+  border: 2px solid rgba(255, 255, 255, .4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+/* ============ Mensajes de estado ============ */
+.status-message {
+  margin: 1.5rem 0 0;
+  padding: .9rem 1.1rem;
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  text-align: center;
+  border: 1px solid transparent;
+  animation: pop-in .5s var(--ease-spring) both;
+}
+.status-message.success {
+  color: var(--success);
+  background: #e8f8f0;
+  border-color: #bfe8d2;
+}
+.status-message.error {
+  color: var(--error);
+  background: #fff1f1;
+  border-color: #ffc9c9;
+  animation: pop-in .5s var(--ease-spring) both, shake .5s var(--ease-out) .5s;
+}
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(.92) translateY(6px); }
+  to   { opacity: 1; transform: none; }
 }
 
-/* 2. Estado Floating: Focus o cuando el input ya tiene texto */
-.form-field:focus-within label,
-.form-field:has(input:not(:placeholder-shown)) label,
-.form-field:has(textarea:not(:placeholder-shown)) label {
-    opacity: 1;
-    color: var(--secondary); /* Resalta con el color del foco */
-    font-size: var(--fs-small);
-    font-weight: var(--fw-semibold);
-    /* Movemos el label hacia la parte superior de la línea del borde */
-    top: 0;
-    transform: translateY(-50%);
-}
 
-
-/* Sobreescribir el color de fondo y texto del autocompletado */
+/* Autocompletado del navegador */
 .form-field input:-webkit-autofill,
-.form-field input:-webkit-autofill:hover, 
+.form-field input:-webkit-autofill:hover,
 .form-field input:-webkit-autofill:focus,
 .form-field textarea:-webkit-autofill,
 .form-field textarea:-webkit-autofill:hover,
 .form-field textarea:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0px 1000px var(--surface) inset !important;
+    -webkit-box-shadow: 0 0 0 1000px var(--surface) inset !important;
     -webkit-text-fill-color: var(--text-primary) !important;
     transition: background-color 5000s ease-in-out 0s;
 }
 
-.form-submit {
-    align-self: flex-start;
-
-    padding: 13px 28px;
-
-    border: none;
-    border-radius: var(--radius-sm);
-
-    background: var(--secondary);
-    color: white;
-
-    font-family: var(--font-body);
-    font-size: var(--fs-body);
-    font-weight: var(--fw-semibold);
-
-    cursor: pointer;
-
-    transition:
-        background 200ms ease,
-        transform 200ms ease,
-        box-shadow 200ms ease;
+/* ============ Accesibilidad ============ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
-
-.form-submit:hover {
-    background: var(--primary);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
-}
-
-.form-submit:active {
-    transform: translateY(0);
-}
-
-@media (max-width: 700px) {
-
-    .form-container {
-        width: min(100% - 24px, 1000px);
-        padding: 50px 0;
-    }
-
-    .form-content {
-        padding: 28px 20px;
-    }
-
-    .form-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .form-field--full {
-        grid-column: auto;
-    }
-
-    .form-submit {
-        width: 100%;
-    }
-}
-
-
