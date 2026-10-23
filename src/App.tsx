@@ -7,6 +7,7 @@ import './App.css'
 import { HomePage } from './pages/Home.tsx'
 import { ContactPage } from './pages/Contact.tsx'
 import { ScrollToTop } from './components/ScrollTop.tsx'
+import { CategoryPage } from './pages/CategoryPage.tsx'
 function App() {
 
 
@@ -17,6 +18,7 @@ function App() {
     <main>
       <ScrollToTop/>
     <Routes>
+      <Route path="/productos/:category" element={<CategoryPage />} />
       <Route path='/' element={<HomePage/>}/>
       <Route path='/contacto' element={<ContactPage/>}/>
     </Routes>

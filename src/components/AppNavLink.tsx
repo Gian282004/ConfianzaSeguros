@@ -1,33 +1,40 @@
 import { NavLink } from "react-router";
-
 import type { FC } from "react";
 
 type Props = {
     name: string;
     path: string;
     onClick?: () => void;
+    className?: string;
 };
 
-export const AppNavLink:FC<Props>=({name, path, onClick}) =>
-{
+export const AppNavLink: FC<Props> = ({
+    name,
+    path,
+    onClick,
+    className = "",
+}) => {
     return (
-        
-                                <NavLink
-                                    onClick={onClick}
-                                    to={path}
-                                    end={path === "/"}
+        <NavLink
+            onClick={onClick}
+            to={path}
+            end={path === "/"}
+            className={({ isActive }) => {
+                const isHashLink = path.includes("#");
 
-                                    className={({ isActive }) => {
-                                        if (path.includes("#")) {
-                                            return location.hash === path.slice(1)
-                                                ? "active"
-                                                : "";
-                                        }
+                const isCurrentActive = isHashLink
+                    ? location.hash === path.slice(1)
+                    : isActive && !location.hash;
 
-                                        return isActive && !location.hash ? "active" : "";
-                                    }}
-                                >
-                                    {name}
-                                </NavLink>
-    )
-}
+                return [
+                    isCurrentActive ? "active" : "",
+                    className,
+                ]
+                    .filter(Boolean)
+                    .join(" ");
+            }}
+        >
+            {name}
+        </NavLink>
+    );
+};
