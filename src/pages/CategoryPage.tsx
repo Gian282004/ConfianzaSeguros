@@ -1,4 +1,4 @@
-import { Link, Navigate, useParams } from "react-router";
+import {Navigate, useParams } from "react-router";
 import "../components/products/Product.css";
 import { categories } from "../consts";
 import { Path, type CategoryKey } from "../types";
