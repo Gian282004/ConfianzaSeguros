@@ -107,8 +107,12 @@
 
 /* Ocultar en dispositivos móviles */
 @media (max-width: 768px) {
+  .hero-actions {
+    justify-content: center;
+  }
     .hero-actions a{
       padding: 8px 16px;
+      font-size: var(--fs-small);
     }
     
     .hero-content h1{
