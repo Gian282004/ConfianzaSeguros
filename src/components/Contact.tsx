@@ -1,12 +1,15 @@
 import { useState } from "react";
 import "./Contact.css";
+import { useDocumentTitle } from "../Hooks/useDocumentTitle";
 
 export function Contact() {
+
+useDocumentTitle("Contacto")
 const [isSubmitting, setIsSubmitting] = useState(false);
 const [statusMessage, setStatusMessage] = useState<{success:boolean, message:string} | null>(null);
 
 const handleSubmit = async (
-    event: React.FormEvent<HTMLFormElement>
+    event: React.SubmitEvent<HTMLFormElement>
 ) => {
     event.preventDefault();
 

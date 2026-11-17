@@ -1,4 +1,4 @@
-import {Navigate, useParams } from "react-router";
+import { Navigate, useParams } from "react-router";
 import "../components/products/Product.css";
 import { categories } from "../consts";
 import { Path, type CategoryKey } from "../types";
@@ -6,20 +6,33 @@ import { CATEGORY_META } from "../components/products/CategoryMeta";
 import { CtaBanner } from "../components/products/CTaBanner";
 import { waLink } from "../utils/WhatsappNumber";
 import { AppNavLink } from "../components/AppNavLink";
+import { useDocumentTitle } from "../Hooks/useDocumentTitle";
 export function CategoryPage() {
   const { category } = useParams();
-  if (!category || !(category in categories)) {
-    return <Navigate to="/productos" replace />;
-  }
   const id = category as CategoryKey;
   const cat = categories[id];
   const meta = CATEGORY_META[id];
+
+
+  let pageTitle = "Seguros para empresas"; // valor por defecto
+
+  if (id === categories.familia.title) {
+    pageTitle = "Seguros para familia";
+  } else if (id === categories.agro.title) {
+    pageTitle = "Seguros para agro";
+  }
+
+  useDocumentTitle(pageTitle)
+  if (!category || !(category in categories)) {
+    return <Navigate to="/productos" replace />;
+  }
+
   return (
     <main className="products-page">
       <section className="category-hero">
-        <AppNavLink name="   ← Todas las soluciones" path={`/${Path.PRODUCTOS}`} className="back-link"/>
-       
-       
+        <AppNavLink name="   ← Todas las soluciones" path={`/${Path.PRODUCTOS}`} className="back-link" />
+
+
         <span className="eyebrow">{meta.eyebrow}</span>
         <h1>{cat.title}</h1>
         <p>{meta.description}</p>

@@ -8,6 +8,7 @@ import { HomePage } from './pages/Home.tsx'
 import { ContactPage } from './pages/Contact.tsx'
 import { ScrollToTop } from './components/ScrollTop.tsx'
 import { CategoryPage } from './pages/CategoryPage.tsx'
+import { HistoriaPage } from './pages/HistoriaPage.tsx'
 function App() {
 
 
@@ -21,6 +22,7 @@ function App() {
       <Route path="/productos/:category" element={<CategoryPage />} />
       <Route path='/' element={<HomePage/>}/>
       <Route path='/contacto' element={<ContactPage/>}/>
+      <Route path='/historia' element={<HistoriaPage/>}/>
     </Routes>
      </main>
      <Footer/>
